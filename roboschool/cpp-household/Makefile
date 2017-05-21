@@ -38,7 +38,7 @@ ifeq ($(UNAME),Darwin)
   endif
   PKG   =pkg-config
   LIBS  =-framework OpenGL
-  INC   =-I/System/Library/Frameworks/OpenGL.framework/Headers
+  INC   =-I/System/Library/Frameworks/OpenGL.framework/Headers -I/usr/local/Cellar/assimp/3.3.1/include -I/opt/X11/include/GLES3 -I/usr/local/Cellar/boost/1.64.0_1/include
   BOOST_PYTHON3_POSTFIX = 3
   BOOST_MT=-mt
   PYTHON = $(shell python3 -c "import sys; print('%i.%i' % sys.version_info[:2])")
