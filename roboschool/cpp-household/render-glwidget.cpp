@@ -155,7 +155,7 @@ void Camera::camera_render(const shared_ptr<SimpleRender::Context>& cx, bool ren
 	if (render_labeling) {
 		timer.start();
 
-		viewport->paint(0, 0, 0, 0, 0, 0, this, 65535, VIEW_CAMERA_BIT, 0); // PAINT HERE
+		viewport->paint(0, 0, 0, 0, 0, 0, this, 65535, VIEW_METACLASS|VIEW_CAMERA_BIT, 0); // PAINT HERE
 
 		camera_labeling.resize(auxw*auxh);
 		camera_labeling_mask.resize(auxw*auxh);
@@ -386,11 +386,11 @@ void Viz::keyPressEvent(QKeyEvent* kev)
 	else if (kev->key()==Qt::Key_F1) cx->slowmo ^= true;
 	else if (kev->key()==Qt::Key_F2) view_options ^= VIEW_NO_CAPTIONS;
 	else if (kev->key()==Qt::Key_F3) view_options ^= VIEW_NO_HUD;
-	else if (kev->key()==0x21) render_viewport->ssao_debug = 0; // Shift + number
-	else if (kev->key()==0x22 || kev->key()==0x40) render_viewport->ssao_debug = 1;
-	else if (kev->key()==0x23) render_viewport->ssao_debug = 2;
-	else if (kev->key()==0x24) render_viewport->ssao_debug = 3;
-	else if (kev->key()==0x29) render_viewport->ssao_enable ^= true;
+	//else if (kev->key()==0x21) render_viewport->ssao_debug = 0;
+	//else if (kev->key()==0x22 || kev->key()==0x40) render_viewport->ssao_debug = 1;
+	//else if (kev->key()==0x23) render_viewport->ssao_debug = 2;
+	//else if (kev->key()==0x24) render_viewport->ssao_debug = 3;
+	//else if (kev->key()==0x29) render_viewport->ssao_enable ^= true;
 	else kev->ignore();
 }
 
@@ -548,7 +548,7 @@ void VizCamera::paintEvent(QPaintEvent* ev)
 		}
 	}
 	p.drawImage( QRect(MARGIN + SCALE*w + MARGIN + SCALE*w + MARGIN, MARGIN, w*SCALE, h*SCALE), img_aux);
-	setWindowTitle(QString("RGB %1x%2, aux %3x%4") . arg(w) . arg(h) . arg(camera->camera_aux_w) . arg(camera->camera_aux_h));
+	setWindowTitle(QString("RGB %1x%2, AUX %3x%4") . arg(w) . arg(h) . arg(camera->camera_aux_w) . arg(camera->camera_aux_h));
 }
 
 void Viz::activate_key_callback(int event_type, int key, int modifiers)
