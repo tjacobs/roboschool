@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export PATH=/usr/local/bin:/usr/local/opt/qt5/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
+export ROBOSCHOOL_PATH=`pwd`
+
+python3 $ROBOSCHOOL_PATH/agent_zoo/RoboschoolInvertedPendulum_v0_2017may.py
+
