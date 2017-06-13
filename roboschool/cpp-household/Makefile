@@ -8,7 +8,9 @@ ifeq ($(UNAME),Linux)
   LIBS =-L/usr/lib64 -lm -lGL -lGLU
   INC  =-I/usr/include
   BOOST_MT=
-  HAVE_PYTHON3 = $(shell which python3)
+  ifneq ($(USE_PYTHON3),0)
+    HAVE_PYTHON3=$(shell which python3)
+  endif
   ifneq ($(HAVE_PYTHON3),)
     PYTHON = $(shell python3 -c "import sys; print('%i.%i' % sys.version_info[:2])")
     ifneq (,$(findstring linuxbrew,$(HAVE_PYTHON3)))
@@ -25,7 +27,7 @@ ifeq ($(UNAME),Linux)
     $(info Linux, python 2 branch)
     PYTHON = $(shell python -c "import sys; print('%i.%i' % sys.version_info[:2])")
   endif
-  RPATH=-Wl,-z,origin -Wl,-rpath,'$$ORIGIN/cpp-household/bullet_local_install/lib'
+  RPATH=-Wl,-z,origin -Wl,--disable-new-dtags -Wl,-rpath,'$$ORIGIN/cpp-household/bullet_local_install/lib'
 endif
 
 ifeq ($(UNAME),Darwin)
